@@ -3,13 +3,12 @@ Fantasy sports is essentially where user selects player for their team to score 
 The team with the highest points at the end of the season wins.
 
 1. Players Table
------------------------------------------------------------------
+
 | playerID (PK) | firstName | lastName | position | clubID (FK) |
------------------------------------------------------------------
+| ------------- | --------- | -------- | -------- | ----------- |
 | 1234          | Miguel    | Almiron  | forward  | 1111        |
------------------------------------------------------------------
 | 5678          | Lionel    | Messi    | forward  | 2222        |
------------------------------------------------------------------
+
 Attributes: playerID, firstName, lastName, position, clubID
 The Primary Keys: playerID
 Foreign Keys: clubID
@@ -18,13 +17,12 @@ Functional Dependencies: playerID -> firstName, lastName, position, clubID
 3NF: YES
 
 2. Clubs Table
------------------------------------------------------------------------------------------
+
 | clubID (PK) | name                | location            | yearFounded | leagueID (FK) |
------------------------------------------------------------------------------------------
+| ----------- | ------------------- | ------------------- | ----------- | ------------- |
 | 1111        | Newcastle United    | Newcastle upon Tyne | 1892        | 4343          |
------------------------------------------------------------------------------------------
 | 2222        | Paris Saint Germain | Paris               | 1970        | 8989          |
------------------------------------------------------------------------------------------
+
 Attributes: clubID, name, location, yearFounded, leagueID
 The Primary Key: clubID
 Foreign Key: leagueID
@@ -33,13 +31,12 @@ Functional Dependencies: clubID -> name, location, yearFounded, leagueID
 3NF: YES
 
 3. Leagues Table
----------------------------------------------------
+
 | leagueID (PK) | name           | country | rank |
----------------------------------------------------
+| ------------- | -------------- | ------- | ---- |
 | 4343          | Premier League | England | 1st  |
----------------------------------------------------
 | 8989          | Ligue 1        | France  | 2nd  |
----------------------------------------------------
+
 Attributes: leagueID, name, country, rank
 The Primary Key: leagueID
 Foreign Key: none
@@ -48,13 +45,12 @@ Functional Dependencies: leagueID -> name, country, rank
 3NF: YES
 
 4. Stats Table (all competitions from previous season)
--------------------------------------------------------------------
+
 | playerID (PK, FK) | appearances | goals | assists | cleanSheets |
--------------------------------------------------------------------
+| ----------------- | ----------- | ----- | ------- | ----------- |
 | 1234              | 26          | 11    | 1       | 0           |
--------------------------------------------------------------------
 | 5678              | 35          | 20    | 18      | 0           |
--------------------------------------------------------------------
+
 Attributes: playerID, appearances, goals, assists, cleanSheets
 The Primary Key: playerID
 Foreign Key: playerID
