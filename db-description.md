@@ -33,8 +33,8 @@ Functional Dependencies: clubID -> name, location, yearFounded, leagueID\
 
 | leagueID (PK) | name           | country | rank |
 | ------------- | -------------- | ------- | ---- |
-| 4343          | Premier League | England | 1st  |
-| 8989          | Ligue 1        | France  | 2nd  |
+| 4343          | Premier League | England | 1    |
+| 8989          | Ligue 1        | France  | 2    |
 
 Attributes: leagueID, name, country, rank\
 The Primary Key: leagueID\
