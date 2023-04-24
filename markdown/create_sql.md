@@ -2,7 +2,7 @@ CREATE TABLE Leagues (
     leagueID INT NOT NULL,
     name VARCHAR(50) NOT NULL,
     country VARCHAR(30) NOT NULL,
-    RANK INT NOT NULL,
+    rank INT NOT NULL,
     PRIMARY KEY (leagueID)
 );
 
