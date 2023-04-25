@@ -32,7 +32,7 @@
 <div class="wrapper">
     <ul class="nav nav-tabs">
     <li class="nav-item">
-    <a class="nav-link active" data-toggle="tab" href="#Tab1">All Info</a>
+    <a class="nav-link active" data-toggle="tab" href="#Tab1">Home</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" data-toggle="tab" href="#Tab2">Players</a>
@@ -51,6 +51,257 @@
 <div class="tab-content">
 <div id="Tab1" class="tab-pane fade show active">
     
+<div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mt-5 mb-3 clearfix">
+                        <h2 class="pull-left">Player Stats</h2>
+                    </div>
+                    <?php
+                    // Include config file
+                    require_once "config.php";
+                    
+                    // Attempt select query execution
+                    $sql = "SELECT firstName,lastName,position,appearances,goals,assists,cleanSheets FROM Players NATURAL JOIN Stats";
+                    if($result = mysqli_query($link, $sql)){
+                        if(mysqli_num_rows($result) > 0){
+                            echo '<table class="table table-bordered table-striped">';
+                                echo "<thead>";
+                                    echo "<tr>";
+                                        echo "<th> First Name </th>";
+                                        echo "<th> Last Name </th>";
+                                        echo "<th> Position </th>";
+                                        echo "<th> Appearances </th>";
+                                        echo "<th> Goals </th>";
+                                        echo "<th> Assists </th>";
+                                        echo "<th> Clean Sheets </th>";
+                                    echo "</tr>";
+                                echo "</thead>";
+                                echo "<tbody>";
+                                while($row = mysqli_fetch_array($result)){
+                                    echo "<tr>";
+                                        echo "<td>" . $row['firstName'] . "</td>";
+                                        echo "<td>" . $row['lastName'] . "</td>";
+                                        echo "<td>" . $row['position'] . "</td>";
+                                        echo "<td>" . $row['appearances'] . "</td>";
+                                        echo "<td>" . $row['goals'] . "</td>";
+                                        echo "<td>" . $row['assists'] . "</td>";
+                                        echo "<td>" . $row['cleanSheets'] . "</td>";
+                                    echo "</tr>";
+                                }
+                                echo "</tbody>";                            
+                            echo "</table>";
+                            // Free result set
+                            mysqli_free_result($result);
+                        } else{
+                            echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+                        }
+                    } else{
+                        echo "Oops! Something went wrong. Please try again later.";
+                    }
+                    ?>
+                </div>
+            </div>        
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mt-5 mb-3 clearfix">
+                        <h2 class="pull-left">Players' Clubs and Leagues</h2>
+                    </div>
+                    <?php
+                    // Include config file
+                    require_once "config.php";
+                    
+                    // Attempt select query execution
+                    $sql = "SELECT Players.firstName,Players.lastName,Clubs.name,Leagues.country FROM Players INNER JOIN Clubs INNER JOIN Leagues ON Clubs.leagueID=Leagues.leagueID && Players.clubID=Clubs.clubID";
+                    if($result = mysqli_query($link, $sql)){
+                        if(mysqli_num_rows($result) > 0){
+                            echo '<table class="table table-bordered table-striped">';
+                                echo "<thead>";
+                                    echo "<tr>";
+                                        echo "<th> First Name </th>";
+                                        echo "<th> Last Name </th>";
+                                        echo "<th> Club Name </th>";
+                                        echo "<th> League Country </th>";
+                                    echo "</tr>";
+                                echo "</thead>";
+                                echo "<tbody>";
+                                while($row = mysqli_fetch_array($result)){
+                                    echo "<tr>";
+                                        echo "<td>" . $row['firstName'] . "</td>";
+                                        echo "<td>" . $row['lastName'] . "</td>";
+                                        echo "<td>" . $row['name'] . "</td>";
+                                        echo "<td>" . $row['country'] . "</td>";
+                                    echo "</tr>";
+                                }
+                                echo "</tbody>";                            
+                            echo "</table>";
+                            // Free result set
+                            mysqli_free_result($result);
+                        } else{
+                            echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+                        }
+                    } else{
+                        echo "Oops! Something went wrong. Please try again later.";
+                    }
+                    ?>
+                </div>
+            </div>        
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mt-5 mb-3 clearfix">
+                        <h2 class="pull-left">Top Goalscorer</h2>
+                    </div>
+                    <?php
+                    // Include config file
+                    require_once "config.php";
+                    
+                    // Attempt select query execution
+                    $sql = "SELECT firstName,lastName,appearances,goals FROM Players NATURAL JOIN Stats WHERE goals = (SELECT MAX(goals) FROM Stats)";
+                    if($result = mysqli_query($link, $sql)){
+                        if(mysqli_num_rows($result) > 0){
+                            echo '<table class="table table-bordered table-striped">';
+                                echo "<thead>";
+                                    echo "<tr>";
+                                        echo "<th> First Name </th>";
+                                        echo "<th> Last Name </th>";
+                                        echo "<th> Appearances </th>";
+                                        echo "<th> Goals </th>";
+                                    echo "</tr>";
+                                echo "</thead>";
+                                echo "<tbody>";
+                                while($row = mysqli_fetch_array($result)){
+                                    echo "<tr>";
+                                        echo "<td>" . $row['firstName'] . "</td>";
+                                        echo "<td>" . $row['lastName'] . "</td>";
+                                        echo "<td>" . $row['appearances'] . "</td>";
+                                        echo "<td>" . $row['goals'] . "</td>";
+                                    echo "</tr>";
+                                }
+                                echo "</tbody>";                            
+                            echo "</table>";
+                            // Free result set
+                            mysqli_free_result($result);
+                        } else{
+                            echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+                        }
+                    } else{
+                        echo "Oops! Something went wrong. Please try again later.";
+                    }
+                    ?>
+                </div>
+            </div>        
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mt-5 mb-3 clearfix">
+                        <h2 class="pull-left">Top Assister</h2>
+                    </div>
+                    <?php
+                    // Include config file
+                    require_once "config.php";
+                    
+                    // Attempt select query execution
+                    $sql = "SELECT firstName,lastName,appearances,assists FROM Players NATURAL JOIN Stats WHERE assists = (SELECT MAX(assists) FROM Stats)";
+                    if($result = mysqli_query($link, $sql)){
+                        if(mysqli_num_rows($result) > 0){
+                            echo '<table class="table table-bordered table-striped">';
+                                echo "<thead>";
+                                    echo "<tr>";
+                                        echo "<th> First Name </th>";
+                                        echo "<th> Last Name </th>";
+                                        echo "<th> Appearances </th>";
+                                        echo "<th> Assists </th>";
+                                    echo "</tr>";
+                                echo "</thead>";
+                                echo "<tbody>";
+                                while($row = mysqli_fetch_array($result)){
+                                    echo "<tr>";
+                                        echo "<td>" . $row['firstName'] . "</td>";
+                                        echo "<td>" . $row['lastName'] . "</td>";
+                                        echo "<td>" . $row['appearances'] . "</td>";
+                                        echo "<td>" . $row['assists'] . "</td>";
+                                    echo "</tr>";
+                                }
+                                echo "</tbody>";                            
+                            echo "</table>";
+                            // Free result set
+                            mysqli_free_result($result);
+                        } else{
+                            echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+                        }
+                    } else{
+                        echo "Oops! Something went wrong. Please try again later.";
+                    }
+                    ?>
+                </div>
+            </div>        
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mt-5 mb-3 clearfix">
+                        <h2 class="pull-left">Most Clean Sheets</h2>
+                    </div>
+                    <?php
+                    // Include config file
+                    require_once "config.php";
+                    
+                    // Attempt select query execution
+                    $sql = "SELECT firstName,lastName,appearances,cleanSheets FROM Players NATURAL JOIN Stats WHERE cleanSheets = (SELECT MAX(cleanSheets) FROM Stats)";
+                    if($result = mysqli_query($link, $sql)){
+                        if(mysqli_num_rows($result) > 0){
+                            echo '<table class="table table-bordered table-striped">';
+                                echo "<thead>";
+                                    echo "<tr>";
+                                        echo "<th> First Name </th>";
+                                        echo "<th> Last Name </th>";
+                                        echo "<th> Appearances </th>";
+                                        echo "<th> Clean Sheets </th>";
+                                    echo "</tr>";
+                                echo "</thead>";
+                                echo "<tbody>";
+                                while($row = mysqli_fetch_array($result)){
+                                    echo "<tr>";
+                                        echo "<td>" . $row['firstName'] . "</td>";
+                                        echo "<td>" . $row['lastName'] . "</td>";
+                                        echo "<td>" . $row['appearances'] . "</td>";
+                                        echo "<td>" . $row['cleanSheets'] . "</td>";
+                                    echo "</tr>";
+                                }
+                                echo "</tbody>";                            
+                            echo "</table>";
+                            // Free result set
+                            mysqli_free_result($result);
+                        } else{
+                            echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+                        }
+                    } else{
+                        echo "Oops! Something went wrong. Please try again later.";
+                    }
+                    ?>
+                </div>
+            </div>        
+        </div>
+    </div>
+
 </div>
 
   <div id="Tab2" class="tab-pane fade">
